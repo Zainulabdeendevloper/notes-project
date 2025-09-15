@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Task</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white min-h-screen flex flex-col items-center p-10">
+
+  <!-- Back button -->
+  <a href="/" class="text-blue-500 hover:underline mb-6">← Go back to Home</a>
+
+  <!-- Note Title -->
+  <h1 class="text-3xl font-bold mb-4"><%= title %></h1>
+
+  <!-- Note Content -->
+  <p class="text-lg leading-relaxed text-zinc-300"><%= content %></p>
+
+</body>
+</html>

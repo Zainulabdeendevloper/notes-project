@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task App</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white min-h-screen flex flex-col items-center">
+
+  <!-- Task Form -->
+  <div class="w-full max-w-2xl mt-10 p-6 bg-zinc-800 rounded-lg shadow-lg">
+    <form action="/create" method="POST" class="flex flex-col space-y-3">
+      <input 
+        class="px-4 py-2 rounded-md bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        type="text" name="title" placeholder="Title..">
+      
+      <textarea 
+        class="px-4 py-2 rounded-md bg-zinc-700 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        rows="3" name="details"
+        placeholder="Write your task details here..."></textarea>
+
+      <input 
+        class="cursor-pointer bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md font-medium" 
+        type="submit" 
+        value="Create Task">
+    </form>
+  </div>
+
+  <!-- Task List -->
+  <div class="w-full max-w-5xl mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+    
+    <% if (files && files.length > 0) { %>
+      <% files.forEach(function(val) { %>
+        <div class="bg-zinc-800 p-5 rounded-lg shadow-lg flex flex-col justify-between">
+          
+          <!-- Task Title -->
+          <h2 class="text-lg font-semibold mb-3"><%= val.title %></h2>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-3 mb-3">
+            <!-- Edit -->
+            <a href="/edit/<%= val._id %>" 
+               class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-black rounded-md text-sm font-medium">
+              Edit
+            </a>
+
+            <!-- Delete -->
+            <a href="/delete/<%= val._id %>" 
+               class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium"
+               onclick="return confirm('Are you sure you want to delete this task?')">
+              Delete
+            </a>
+          </div>
+
+          <!-- Read More -->
+          <a href="/task/<%= val._id %>" 
+             class="text-blue-400 hover:underline text-sm">
+            Read More..
+          </a>
+          
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="text-zinc-400 text-center col-span-3">No tasks available.</p>
+    <% } %>
+
+  </div>
+
+</body>
+</html>
